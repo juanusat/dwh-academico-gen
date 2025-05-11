@@ -57,18 +57,21 @@ def main():
     cargar_env()
     conn = obtener_conexion_bd()
 
-    # Paso 1: borrar toda la base de datos
+    # Borrar toda la base de datos
     ejecutar_archivo_sql(conn, os.path.join('notas', 'drop_db.sql'))
 
-    # Paso 2: ejecutar scripts de generación de inserts
+    # Definir esquema de la base de datos
+    ejecutar_archivo_sql(conn, 'academico-ddl.sql')
+
+    # Ejecutar scripts de generación de inserts
     ejecutar_script_python(os.path.join('crear', 'a-inserts-carreras_cursos.py'))
     ejecutar_script_python(os.path.join('crear', 'b-inserts-sem_docnt_estud.py'))
 
-    # Paso 3: aplicar inserts generados
+    # Aplicar inserts generados
     ejecutar_archivo_sql(conn, os.path.join('inserts', 'a-carreras-cursos.sql'))
     ejecutar_archivo_sql(conn, os.path.join('inserts', 'b-sem-docnt-estud.sql'))
 
-    # Paso 4: generar progreso estudiantil
+    # Generar progreso estudiantil
     ejecutar_script_python(os.path.join('crear', 'c-generar-progreso-estudiantil.py'))
 
     conn.close()
