@@ -1,0 +1,70 @@
+{
+    "facultades": {
+        "Ingenieria": [
+            {
+                "carrera": "Ingeniería civil",
+                "planes_estudio": [
+                    {
+                        "nombre": "2018",
+                        "version": "2",
+                        "cursos": "civil"
+                    }
+                ]
+            },
+            {
+                "carrera": "Ingeniería de sistemas y computación",
+                "planes_estudio": [
+                    {
+                        "nombre": "2017",
+                        "version": "4",
+                        "cursos": "sistemas"
+                    }
+                ]
+            }
+        ],
+        "Humanidades": [
+            {
+                "carrera": "Educación inicial",
+                "planes_estudio": [
+                    {
+                        "nombre": "2016",
+                        "version": "1",
+                        "cursos": "eduinicial"
+                    }
+                ]
+            },
+            {
+                "carrera": "Comunicación",
+                "planes_estudio": [
+                    {
+                        "nombre": "2019",
+                        "version": "2",
+                        "cursos": "comunicacion"
+                    }
+                ]
+            }
+        ],
+        "Medicina": [
+            {
+                "carrera": "Psicología",
+                "planes_estudio": [
+                    {
+                        "nombre": "2018",
+                        "version": "2",
+                        "cursos": "psicologia"
+                    }
+                ]
+            },
+            {
+                "carrera": "Enfermería",
+                "planes_estudio": [
+                    {
+                        "nombre": "2016",
+                        "version": "4",
+                        "cursos": "enfermeria"
+                    }
+                ]
+            }
+        ]
+    }
+}
