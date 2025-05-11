@@ -134,10 +134,21 @@ def generar_direccion():
 
 def generar_fecha_nacimiento(semestre_ingreso):
     año_ingreso = int(semestre_ingreso.split('-')[0])
-    edad = random.randint(17, 21)
+    probabilidad = random.random()
+    
+    if probabilidad < 0.70:
+        edad = random.choice([17, 18])
+    elif probabilidad < 0.95:
+        edad = random.choice([19, 20])
+    elif probabilidad < 0.005:
+        edad = random.choice([22, 23])
+    else:
+        edad = 21
+
     año_nacimiento = año_ingreso - edad
     mes = random.randint(1, 12)
     dia = random.randint(1, 28)
+
     try:
         fecha = datetime(año_nacimiento, mes, dia)
         return fecha.strftime('%Y-%m-%d')
