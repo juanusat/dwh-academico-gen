@@ -5,4 +5,4 @@ notas-privadas/
 bs/
 .venv/
 priv-*/
-inserts/test-*
+inserts/
