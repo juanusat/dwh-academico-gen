@@ -297,3 +297,23 @@ GROUP BY
     pe.idplanestudio,
     es.nomescuela
 ORDER BY ultimo_semestre_matriculado DESC;
+
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--S14: Alumnos cuyo semestre de ingresob es diferente al semestre de sus primera matrícula
+SELECT
+  e.idestudiante,
+  e.nombres || ' ' || e.apepat || ' ' || e.apemat AS nombre_completo,
+  e.idsemestreing                                AS semestre_ingreso,
+  m.primer_semestre                              AS primer_semestre_matricula
+FROM estudiante e
+JOIN (
+  SELECT
+    idestudiante,
+    MIN(idsemestre) AS primer_semestre
+  FROM matricula
+  GROUP BY idestudiante
+) m
+  ON e.idestudiante = m.idestudiante
+WHERE e.idsemestreing <> m.primer_semestre
+ORDER BY e.idestudiante;
