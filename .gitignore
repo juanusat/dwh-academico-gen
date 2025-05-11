@@ -1,0 +1,7 @@
+log-*
+.env
+__pycache__/
+notas-privadas/
+bs/
+.venv/
+priv-*/
