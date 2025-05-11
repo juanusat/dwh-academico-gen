@@ -26,7 +26,7 @@ create table curso (
     creditos int not null,
     h_teorica int not null,
     h_practica int not null,
-    tipo_curso boolean not null,
+    tipo_curso boolean not null, -- True: obligatorio, False: no obligatorio
     dificultad smallint null,
     primary key (idcurso)
 );
@@ -69,11 +69,11 @@ create table docente (
     apemat varchar(40) not null,
     dni char(8) not null unique,
     correo varchar(50) not null unique,
-    sexo char(1) not null,
+    sexo char(1) not null, -- valores: (F) femenino, (M) masculino
     direccion varchar(100) not null,
-    tipo_docente char(2) not null,
-    grado_academico char(1) not null,
-    estado_docente boolean not null,
+    tipo_docente char(2) not null, -- valores: (NO) nombrado, (PA) parcial
+    grado_academico char(1) not null, -- valores: (B) bachiller, (M) magister, (D) doctor, (T) titulado
+    estado_docente boolean not null, -- True: se puede contratar, False: no se pude contratar
     primary key (iddocente)
 );
 
@@ -86,10 +86,10 @@ create table estudiante (
     apemat varchar(40) not null,
     dni char(8) not null unique,
     correo varchar(50) not null unique,
-    sexo char(1) not null,
+    sexo char(1) not null, -- valores: (F) femenino, (M) masculino
     fechanac date not null,
     direccion varchar(100) not null,
-    estadoalu char(1) not null,
+    estadoalu char(1) not null, -- valores: (A) activo, (R) retirado
     primary key (idestudiante)
 );
 
@@ -106,9 +106,9 @@ create table detalle_matricula (
     iddetmat serial not null,
     idcursoprog int not null,
     idmatricula int not null,
-    estado char(1) not null,
+    estado char(1) not null, -- valores: (A) aprobado, (D) desaprobado
     nota_promedio numeric(4,2) not null,
-    modalidad char(1) not null,
+    modalidad char(1) not null, -- valores: (R) regular
     primary key (iddetmat)
 );
 
