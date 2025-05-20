@@ -56,7 +56,7 @@ create table semestre (
 create table curso_programado (
     idcursoprog serial not null,
     promedfinal numeric(4, 2) not null,
-    condicion char(1) not null,
+    condicion char(1) not null, -- siempre 'P': presencial
     idsemestre varchar not null,
     idplancurso int not null,
     iddocente int not null,
