@@ -1,0 +1,11 @@
+REQ01:	Reporte del promedio final de los estudiantes por curso, semestre y año.							
+REQ02:	Cantidad de aprobados/desaprobados por estudiante y curso.							
+REQ03:	Reporte de rendimiento promedio por docente, basado en los promedios obtenidos por sus estudiantes.							
+REQ04:	Reporte de tasa de retirados por curso y docente.							
+REQ05:	Ranking de estudiantes con mejor rendimiento académico por semestre.							
+REQ06:	Evolución del rendimiento académico de un estudiante a lo largo de su carrera.							
+REQ07:	Reporte de tasa de desaprobación por curso, docente y semestre.							
+REQ08:	Comparativo de rendimiento entre estudiantes por número de créditos matriculados.							
+REQ09:	Reporte de rendimiento promedio por sexo de estudiante							
+
+link de excel en drive: https://docs.google.com/spreadsheets/d/1BQVJ32MUTR1G0H_fnsQlorKLICvTEs5R/edit?usp=sharing&ouid=103381846685422124952&rtpof=true&sd=true
