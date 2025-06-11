@@ -155,6 +155,19 @@ def generar_fecha_nacimiento(semestre_ingreso):
     except ValueError:
         return f"{año_nacimiento}-{mes:02d}-01"
 
+def generar_fecha_nacimiento_docente():
+    edad = random.randint(28, 70)
+    hoy = datetime.today()
+    año_nacimiento = hoy.year - edad
+    mes = random.randint(1, 12)
+    dia = random.randint(1, 28)
+
+    try:
+        fecha = datetime(año_nacimiento, mes, dia)
+        return fecha.strftime('%Y-%m-%d')
+    except ValueError:
+        return f"{año_nacimiento}-{mes:02d}-01"
+
 def generar_fecha_semestre(semestre):
     año, ciclo = semestre.split('-')
     año = int(año)
@@ -217,12 +230,13 @@ try:
                 "direccion":    direccion,
                 "tipo_docente": tipo_doc,
                 "grado_academico": grado,
-                "estado_docente": True
+                "estado_docente": True,
+                "fechanac":     generar_fecha_nacimiento_docente()
             })
         for doc in docentes_pool:
             sqlf.write(
                 f"INSERT INTO docente (iddocente, nombres, apepat, apemat, dni, correo, sexo, direccion, "
-                f"tipo_docente, grado_academico, estado_docente) "
+                f"tipo_docente, grado_academico, estado_docente, fechanac) "
                 f"VALUES ("
                 f"{doc['id']}, "
                 f"'{doc['nombres']}', "
@@ -234,7 +248,8 @@ try:
                 f"'{doc['direccion']}', "
                 f"'{doc['tipo_docente']}', "
                 f"'{doc['grado_academico']}', "
-                f"{str(doc['estado_docente']).upper()}"
+                f"{str(doc['estado_docente']).upper()}, "
+                f"'{doc['fechanac']}'"
                 f");\n"
             )
             total_docentes_generados += 1
