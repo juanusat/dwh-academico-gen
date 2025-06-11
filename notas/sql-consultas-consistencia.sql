@@ -320,9 +320,9 @@ ORDER BY e.idestudiante;
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
---S15: Matriculados y retirados por semestre y el acumulado
+-- S15: Matriculados, retirados e ingresantes por semestre y sus acumulados
 WITH
-  -- 1) Contar cuántos alumnos se matricularon en cada semestre
+  -- 1) Cantidad de estudiantes que se matricularon en cada semestre
   matriculados AS (
     SELECT
       m.idsemestre,
@@ -331,7 +331,7 @@ WITH
     GROUP BY m.idsemestre
   ),
 
-  -- 2) Contar cuántos de esos alumnos están en estado 'R' (retirado) en cada semestre
+  -- 2) Cantidad de estudiantes retirados por semestre de matrícula
   retirados AS (
     SELECT
       m.idsemestre,
@@ -340,19 +340,33 @@ WITH
     JOIN estudiante e ON e.idestudiante = m.idestudiante
     WHERE e.estadoalu = 'R'
     GROUP BY m.idsemestre
+  ),
+
+  -- 3) Cantidad de estudiantes que ingresaron en cada semestre
+  ingresantes AS (
+    SELECT
+      e.idsemestreing AS idsemestre,
+      COUNT(*) AS cnt_ingresantes
+    FROM estudiante e
+    GROUP BY e.idsemestreing
   )
 
 SELECT
   s.idsemestre,
-  COALESCE(mat.cnt_matriculados, 0)           AS matriculados_semestre,
-  -- acumulado de matriculados hasta ese semestre (ordenado por fecha_inicio)
-  SUM(COALESCE(mat.cnt_matriculados, 0))
-    OVER (ORDER BY s.fecha_inicio)           AS acumulado_matriculados,
-  COALESCE(ret.cnt_retirados, 0)              AS retirados_semestre,
-  -- acumulado de retirados hasta ese semestre
-  SUM(COALESCE(ret.cnt_retirados, 0))
-    OVER (ORDER BY s.fecha_inicio)           AS acumulado_retirados
+  -- Ingresantes del semestre y su acumulado
+  COALESCE(ing.cnt_ingresantes, 0) AS ingresantes_semestre,
+  SUM(COALESCE(ing.cnt_ingresantes, 0)) OVER (ORDER BY s.fecha_inicio) AS acumulado_ingresantes,
+  
+  -- Matriculados del semestre y su acumulado (ordenados como pediste)
+  COALESCE(mat.cnt_matriculados, 0) AS matriculados_semestre,
+  SUM(COALESCE(mat.cnt_matriculados, 0)) OVER (ORDER BY s.fecha_inicio) AS acumulado_matriculados,
+
+  -- Retirados del semestre y su acumulado
+  COALESCE(ret.cnt_retirados, 0) AS retirados_semestre,
+  SUM(COALESCE(ret.cnt_retirados, 0)) OVER (ORDER BY s.fecha_inicio) AS acumulado_retirados
+
 FROM semestre s
 LEFT JOIN matriculados mat ON mat.idsemestre = s.idsemestre
-LEFT JOIN retirados   ret ON ret.idsemestre = s.idsemestre
+LEFT JOIN retirados ret ON ret.idsemestre = s.idsemestre
+LEFT JOIN ingresantes ing ON ing.idsemestre = s.idsemestre
 ORDER BY s.fecha_inicio;
