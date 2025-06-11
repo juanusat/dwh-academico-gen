@@ -1,5 +1,6 @@
 log-*
 .env
+*.env
 __pycache__/
 notas-privadas/
 bs/
