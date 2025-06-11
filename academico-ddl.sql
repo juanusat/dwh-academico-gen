@@ -71,6 +71,7 @@ create table docente (
     correo varchar(50) not null unique,
     sexo char(1) not null, -- valores: (F) femenino, (M) masculino
     direccion varchar(100) not null,
+    fechanac date not null,
     tipo_docente char(2) not null, -- valores: (NO) nombrado, (PA) parcial
     grado_academico char(1) not null, -- valores: (B) bachiller, (M) magister, (D) doctor, (T) titulado
     estado_docente boolean not null, -- True: se puede contratar, False: no se pude contratar
