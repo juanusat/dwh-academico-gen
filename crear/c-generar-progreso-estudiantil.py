@@ -390,7 +390,7 @@ def main():
 
                         # Generar nota aleatoria con distribución gaussiana
                         nota = round(min(20, max(0, random.gauss(mu, sigma))), 2) # Asegurar rango 0-20
-                        estado = 'A' if nota >= 10.5 else 'D' # Aprobado con 10.5 o más
+                        estado = 'A' if nota >= 13.5 else 'D' # Aprobado con 13.5 o más
 
                         cur.execute(
                             "INSERT INTO detalle_matricula (idcursoprog,idmatricula,estado,nota_promedio,modalidad) VALUES (%s,%s,%s,%s,'R')", # Asumiendo 'R'egular
